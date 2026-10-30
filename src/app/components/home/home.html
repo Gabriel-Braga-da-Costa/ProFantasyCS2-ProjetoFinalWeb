@@ -1,0 +1,11 @@
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center gap-2">
+
+    <div class="d-flex flex-row gap-2">
+        @for(jogador of jogadorService.jogadores(); track jogador.id){
+        <p>{{jogador.nomeJogador}}</p>
+        } @empty {
+        <p>Nenhum Jogador Encontrado</p>
+        }
+    </div>
+
+</div>

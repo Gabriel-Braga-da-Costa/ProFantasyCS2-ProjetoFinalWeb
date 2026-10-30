@@ -1,0 +1,94 @@
+@if (emEdicao) {
+<h2 class="text-center">Editando jogador nº {{jogadorId}}</h2>
+} @else {
+<h2 class="text-center">Novo Jogador</h2>
+}
+
+<div class="d-flex justify-content-center text-center">
+
+    <form id="formJogador" [formGroup]="formJogador" (ngSubmit)="salvar()">
+
+        <div class="mb-3">
+            <label for="nomeJogador" class="form-label">
+                Nome Jogador:
+            </label>
+
+            <input type="text" id="nomeJogador" class="form-control" formControlName="nomeJogador">
+            @if(formJogador.controls.nomeJogador.invalid &&
+            formJogador.controls.nomeJogador.touched){
+            <div class="text-danger">
+                O nome do jogador é obrigatório.
+            </div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="equipe" class="form-label">
+                Equipe:
+            </label>
+
+            <input type="text" id="equipe" class="form-control" formControlName="equipe">
+            @if(formJogador.controls.equipe.invalid &&
+            formJogador.controls.equipe.touched){
+            <div class="text-danger">
+                A equipe do jogador é obrigatório.
+            </div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="kills" class="form-label">
+                Kills:
+            </label>
+
+            <input type="number" id="kills" class="form-control" formControlName="kills" min="0">
+            @if(formJogador.controls.kills.invalid &&
+            formJogador.controls.kills.touched){
+            <div class="text-danger">
+                A quantidade de kills é obrigatória.
+            </div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="deaths" class="form-label">
+                Deaths:
+            </label>
+
+            <input type="number" id="deaths" class="form-control" formControlName="deaths" min="0">
+            @if(formJogador.controls.deaths.invalid &&
+            formJogador.controls.deaths.touched){
+            <div class="text-danger">
+                A quantidade de deaths é obrigatória.
+            </div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="assists" class="form-label">
+                Assists:
+            </label>
+
+            <input type="number" id="assists" class="form-control" formControlName="assists" min="0">
+            @if(formJogador.controls.assists.invalid &&
+            formJogador.controls.assists.touched){
+            <div class="text-danger">
+                A quantidade de assists é obrigatória.
+            </div>
+            }
+        </div>
+
+        <button type="button" class="btn btn-secondary" (click)="cancelar()">
+            Cancelar
+        </button>
+
+        <button type="submit" class="btn btn-primary" [disabled]="formJogador.invalid">
+            @if(emEdicao){
+            Salvar
+            } @else {
+            Cadastrar
+            }
+        </button>
+
+    </form>
+</div>
