@@ -6,5 +6,6 @@ import { Escalacoes } from './components/escalacoes/escalacoes';
 export const routes: Routes = [
     { path: '', component: Home },
     { path: 'jogador/novo', component: CadastroJogadores },
+    { path: 'jogador/:id/editar', component: CadastroJogadores },
     { path: 'equipe/nova', component: Escalacoes }
 ];

@@ -78,16 +78,44 @@
             }
         </div>
 
+        <div class="mb-3">
+            <label for="posicao" class="form-label">
+                Posição
+            </label>
+
+            <select id="posicao" class="form-select" formControlName="posicao">
+                <option [ngValue]="null" disabled>
+                    Selecione uma posição
+                </option>
+
+                @for(posicao of posicoes; track posicao){
+                <option [ngValue]="posicao">
+                    {{posicao}}
+                </option>
+                }
+            </select>
+
+            @if (formJogador.controls.posicao.invalid &&
+            formJogador.controls.posicao.touched) {
+
+            <div class="text-danger">
+                O gênero é obrigatório.
+            </div>
+            }
+        </div>
+
         <button type="button" class="btn btn-secondary" (click)="cancelar()">
             Cancelar
         </button>
 
         <button type="submit" class="btn btn-primary" [disabled]="formJogador.invalid">
+
             @if(emEdicao){
             Salvar
             } @else {
             Cadastrar
             }
+
         </button>
 
     </form>
