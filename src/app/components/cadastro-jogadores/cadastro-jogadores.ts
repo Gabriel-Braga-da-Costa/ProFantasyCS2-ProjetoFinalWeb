@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { JogadorService } from '../../services/jogador-service';
 import { Jogador } from '../../model/jogador';
+import { Posicao } from '../../model/posicao';
 
 @Component({
   selector: 'app-cadastro-jogadores',
@@ -19,6 +20,8 @@ export class CadastroJogadores {
 
   emEdicao = this.route.snapshot.paramMap.has('id');
   jogadorId = Number(this.route.snapshot.paramMap.get('id'));
+
+  posicoes = Object.values(Posicao);
 
   formJogador = new FormGroup({
     nomeJogador: new FormControl('', Validators.required),
@@ -45,11 +48,11 @@ export class CadastroJogadores {
 
     this.jogadorService.addJogador(novoJogador).then(() => {
 
-    });
+      this.formJogador.reset();
 
-    this.formJogador.reset();
+      this.router.navigate(['/']);
+    })
 
-    this.router.navigate(['/']);
   }
 
   atualizarJogador() {
@@ -61,7 +64,9 @@ export class CadastroJogadores {
       this.formJogador.value.kills!,
       this.formJogador.value.deaths!,
       this.formJogador.value.assists!
-    )
+    ).then(() => {
+      this.router.navigate(['/']);
+    })
   }
 
   salvar() {

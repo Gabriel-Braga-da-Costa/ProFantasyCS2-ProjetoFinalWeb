@@ -29,8 +29,15 @@ export class JogadorService {
       novoJogador.id = novoId;
 
       //atualiza a lista com o jogo
-      this.jogadorSignal.update(lista => [...lista, novoJogador]);
+      this.jogadorSignal.update(jogador => [...jogador, novoJogador]);
     })
+  }
+
+  removerJogador(id: number) {
+    return this.dbService.jogadores.delete(id).then(() => {
+      this.jogadorSignal.update(jogadores => jogadores.filter(jogador => jogador.id !== id));
+    })
+
   }
 
   atualizarJogador(id: number, nomeJogador: string, equipe: string, posicao: string, kills: number, deaths: number, assists: number) {
