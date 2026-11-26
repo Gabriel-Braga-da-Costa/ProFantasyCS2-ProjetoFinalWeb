@@ -30,6 +30,7 @@ export class CadastroJogadores {
     kills: new FormControl(0, [Validators.required, Validators.min(0)]),
     deaths: new FormControl(0, [Validators.required, Validators.min(0)]),
     assists: new FormControl(0, [Validators.required, Validators.min(0)]),
+    titular: new FormControl<boolean>(false, { nonNullable: true })
   });
 
   cancelar() {
@@ -43,7 +44,8 @@ export class CadastroJogadores {
       posicao: this.formJogador.value.posicao!,
       kills: this.formJogador.value.kills!,
       deaths: this.formJogador.value.deaths!,
-      assists: this.formJogador.value.assists!
+      assists: this.formJogador.value.assists!,
+      titular: this.formJogador.value.titular!
     };
 
     this.jogadorService.addJogador(novoJogador).then(() => {
@@ -63,7 +65,8 @@ export class CadastroJogadores {
       this.formJogador.value.posicao!,
       this.formJogador.value.kills!,
       this.formJogador.value.deaths!,
-      this.formJogador.value.assists!
+      this.formJogador.value.assists!,
+      this.formJogador.value.titular!
     ).then(() => {
       this.router.navigate(['/']);
     })
@@ -76,6 +79,20 @@ export class CadastroJogadores {
       } else {
         this.cadastrarJogador();
       }
+    }
+  }
+
+  constructor() {
+    if (this.emEdicao) {
+      this.jogadorService.getJogador(this.jogadorId).then(jogador => {
+
+        if (jogador) {
+          this.formJogador.patchValue(jogador);
+
+        } else {
+          this.router.navigate(['/']);
+        }
+      });
     }
   }
 }

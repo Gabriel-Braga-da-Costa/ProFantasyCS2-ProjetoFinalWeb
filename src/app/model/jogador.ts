@@ -6,6 +6,7 @@ export interface Jogador {
     kills: number,
     deaths: number,
     assists: number,
-    escalacaoId?: number //FK
+    escalacaoId?: number, //FK
+    titular: boolean
 
 }

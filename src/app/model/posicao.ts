@@ -1,7 +1,7 @@
 export enum Posicao {
-    AWP = 'Awp',
-    IGL = "Igl",
-    RIFLE = "Rifle",
-    ENTRY = "Entry",
-    LURK = "Lurk"
+    AWP = 'AWP',
+    IGL = "IGL",
+    RIFLE = "RIFLE",
+    ENTRY = "ENTRY",
+    LURK = "LURKER"
 }
