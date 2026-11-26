@@ -7,5 +7,7 @@ export const routes: Routes = [
     { path: '', component: Home },
     { path: 'jogador/novo', component: CadastroJogadores },
     { path: 'jogador/:id/editar', component: CadastroJogadores },
-    { path: 'equipe/nova', component: Escalacoes }
+    { path: 'escalacoes', component: Escalacoes },
+    { path: 'escalacoes/nova', component: Escalacoes },
+    { path: 'escalacoes/:id/editar', component: Escalacoes }
 ];

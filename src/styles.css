@@ -1,1 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
+:root[data-bs-theme="dark"] {
+    --bs-body-bg: #11151b;
+    --bs-body-color: #ffffff;
+}
+
+body {
+    background-color: #11151B;
+    color: #ffffff;
+}
+
+.icone-jogador {
+    width: 40px;
+    height: 40px;
+    background-color: #343a40;
+    color: #adb5bd;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.progress {
+    background-color: #343a40;
+    border-radius: 10px;
+}
+
+.card {
+    transition: background-color 0.2s;
+}
+
+.card:hover {
+    background-color: #2b3035 !important;
+}
+
+.icone-jogador {
+    width: 45px;
+    height: 45px;
+    background-color: #343a40;
+    color: #adb5bd;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+thead {
+    --bs-table-bg: #2b3035;
+}
+
+tfoot {
+    --bs-table-bg: #2b3035;
+}
+
+.linha-mvp {
+    --bs-table-bg: #302c20;
+}
+
+.table {
+    --bs-table-hover-bg: #343a40;
+    --bs-table-border-color: #373b3e;
+}
+
+.table-responsive {
+    overflow: auto;
+}

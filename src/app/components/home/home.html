@@ -1,74 +1,92 @@
-<div class="d-flex">
-    <div class="card col-6">
-        <div class="card-body">
-            <div class="card theme-primary card-header m-3">
-                <h2 class="text-center">PRO FANTASY TEAM</h2>
-            </div>
+<div class="m-4">
+    <h1 class="text-center m-3">{{tituloSistema}}</h1>
+</div>
 
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{jogadoresExibidos()}}</h5>
-                        <small>3 days ago</small>
-                    </div>
-                    <p class="mb-1">Some placeholder content in a paragraph.</p>
-                    <small>And some small print.</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small class="fg-2">3 days ago</small>
-                    </div>
-                    <p class="mb-1">Some placeholder content in a paragraph.</p>
-                    <small class="fg-2">And some muted small print.</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small class="fg-2">3 days ago</small>
-                    </div>
-                    <p class="mb-1">Some placeholder content in a paragraph.</p>
-                    <small class="fg-2">And some muted small print.</small>
-                </a>
+<div class="mx-auto" style="max-width: 1232px;">
+
+    <div class="d-flex flex-row justify-content-center gap-3">
+
+        <div class="card card-row bg-dark text-white" style="width: 400px;">
+            <div class="card-body">
+                <h5 class="card-title">Pontuação</h5>
+                <h3 class="card-text text-warning">{{pontuacaoTotal()}}</h3>
+                <p class="card-text"><small class="fg-2">Pontuação total da equipe</small></p>
             </div>
         </div>
+
+        <div class="card card-row bg-dark text-white" style="width: 400px;">
+            <div class="card-body">
+                <h5 class="card-title">Escalados</h5>
+                <h3 class="card-text text-white">{{totalTitulares()}}/5</h3>
+                <p class="card-text"><small class="fg-2">Jogadores na escalação</small></p>
+            </div>
+        </div>
+
+        <div class="card card-row bg-dark text-white" style="width: 400px;">
+            <div class="card-body">
+                <h5 class="card-title">MVP</h5>
+                <h3 class="card-text text-white">{{mvp().nomeJogador}}</h3>
+                <p class="card-text"><small class="fg-2">Melhor jogador da equipe</small></p>
+            </div>
+        </div>
+
     </div>
 
-    <div class="container-fluid d-flex flex-column justify-content-center align-items-center gap-2">
+    <div class="d-flex justify-content-between mt-3">
+        <h6 class="text-white">Equipe titular</h6>
 
-        <div class="d-flex flex-column gap-2">
-            @for(jogador of jogadorService.jogadores(); track jogador.id){
+        <a class="nav-link text-warning" routerLink="/escalacoes">Gerenciar equipe</a>
+    </div>
 
-            <div class="card">
-                <div class="card-body">
-                    <a href="#" class="list-group-item list-group-item-action mb-2" aria-current="true">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">{{jogador.nomeJogador}}</h5>
-                            <small>Rating</small>
+
+</div>
+
+<div class="mx-auto mt-3" style="max-width: 1232px;">
+
+    <div class="table-responsive rounded-3 border border-secondary">
+
+        <table class="table table-dark table-hover align-middle mb-0 ">
+            <thead>
+                <tr>
+                    <th>JOGADOR</th>
+                    <th>K / D / A</th>
+                    <th>PTS</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (jogador of ordenar(); track jogador.id) {
+                <tr>
+                    <td>
+                        <i class="bi bi-person"></i>
+
+                        <strong>{{ jogador.nomeJogador }}</strong>
+                        <div>
+                            <small>{{ jogador.posicao }}</small>
                         </div>
-                        <p class="mb-1">Posição: {{jogador.posicao}}</p>
-                        <small>KDA: </small>
-                    </a>
+                    </td>
 
-                    <div class="d-flex gap-1">
-                        <a class="btn btn-sm btn-primary" [routerLink]="['jogador', jogador.id, 'editar']">
-                            Editar
-                        </a>
+                    <td>
+                        {{ jogador.kills }} /
+                        {{ jogador.deaths }} /
+                        {{ jogador.assists }}
+                    </td>
 
-                        <button class="btn btn-sm btn-danger" (click)="remover(jogador)">
-                            Remover
-                        </button>
-                    </div>
+                    <td class="text-warning fw-bold">
+                        {{ pontuacaoService.calcularPontos(jogador) }}
+                    </td>
+                </tr>
+                } @empty {
 
-                </div>
-            </div>
+                <tr>
+                    <td colspan="3" class="text-center text-secondary p-4">
+                        Nenhum jogador titular escalado.
+                    </td>
+                </tr>
 
+                }
 
-
-            } @empty {
-            <p>Nenhum Jogador Encontrado</p>
-            }
-        </div>
-
+            </tbody>
+        </table>
     </div>
 </div>

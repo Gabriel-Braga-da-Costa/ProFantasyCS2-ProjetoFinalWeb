@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Jogador } from '../model/jogador';
 import { DbService } from './db-service';
 
@@ -14,6 +14,26 @@ export class JogadorService {
 
   //signal para leitura
   jogadores = this.jogadorSignal.asReadonly();
+
+  jogadoresTitulares = computed(() => {
+    return this.jogadores().filter(jogador => jogador.titular === true);
+  });
+
+  jogadoresReservas = computed(() => {
+    return this.jogadores().filter(jogador => jogador.titular !== true);
+  });
+
+  totalTitulares = computed(() => {
+    return this.jogadoresTitulares().length;
+  });
+
+  totalReservas = computed(() => {
+    return this.jogadoresReservas().length;
+  });
+
+  escalacaoCompleta = computed(() => {
+    return this.totalTitulares() >= 5;
+  })
 
   constructor() {
     //carrega os jogadores que estão no indexedb
@@ -40,10 +60,44 @@ export class JogadorService {
 
   }
 
-  atualizarJogador(id: number, nomeJogador: string, equipe: string, posicao: string, kills: number, deaths: number, assists: number) {
+  atualizarJogador(id: number, nomeJogador: string, equipe: string, posicao: string, kills: number, deaths: number, assists: number, titular: boolean) {
     return this.dbService.jogadores
-      .update(id, { nomeJogador: nomeJogador, equipe: equipe, posicao: posicao, kills: kills, deaths: deaths, assists: assists })
+      .update(id, { nomeJogador: nomeJogador, equipe: equipe, posicao: posicao, kills: kills, deaths: deaths, assists: assists, titular: titular })
       .then(() => this.dbService.jogadores.toArray())
       .then(jogadores => this.jogadorSignal.set(jogadores));
+  }
+
+
+  getJogador(id: number) {
+    return this.dbService.jogadores.get(id);
+  }
+
+  escalarJogador(id: number) {
+
+    if (this.totalTitulares() >= 5) {
+      return false;
+    }
+
+    return this.dbService.jogadores
+      .update(id, { titular: true })
+      .then(() => this.dbService.jogadores.toArray())
+      .then(jogadores => {
+        this.jogadorSignal.set(jogadores);
+
+        return true;
+      });
+  }
+
+
+  reservarJogador(id: number) {
+
+    return this.dbService.jogadores
+      .update(id, {
+        titular: false
+      })
+      .then(() => this.dbService.jogadores.toArray()
+        .then(jogadores => {
+          this.jogadorSignal.set(jogadores);
+        }))
   }
 }

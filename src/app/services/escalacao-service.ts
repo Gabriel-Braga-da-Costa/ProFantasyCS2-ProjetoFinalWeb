@@ -1,6 +1,7 @@
 import { inject, Service, signal } from '@angular/core';
 import { DbService } from './db-service';
 import { Escalacao } from '../model/escalacao';
+import { Jogador } from '../model/jogador';
 
 @Service()
 export class EscalacaoService {
@@ -10,7 +11,7 @@ export class EscalacaoService {
   //lista escalacao vazia
   private escalacaoSignal = signal<Escalacao[]>([]);
 
-  escalacoes = this.escalacaoSignal.asReadonly;
+  escalacoes = this.escalacaoSignal.asReadonly();
 
   constructor() {
     this.dbService.escalacoes.toArray().then(escalacoes => {
