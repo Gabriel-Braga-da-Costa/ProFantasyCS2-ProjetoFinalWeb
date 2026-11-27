@@ -56,6 +56,7 @@
                     <i class="bi bi-person"></i>
                 </div>
 
+
                 <div class="flex-grow-1">
 
                     <strong>{{jogador.nomeJogador}}</strong>
@@ -141,6 +142,11 @@
                     <i class="bi bi-arrow-up me-1"></i>
                     Escalar
 
+                </button>
+
+                <button class="btn btn-sm btn-outline-danger rounded-pill" (click)="removerJogador(jogador)">
+                    <i class="bi bi-arrow-down me-1"></i>
+                    Remover
                 </button>
 
             </div>

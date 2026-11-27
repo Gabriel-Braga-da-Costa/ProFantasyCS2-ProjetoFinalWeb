@@ -4,11 +4,11 @@
 <h2 class="text-center">Novo Jogador</h2>
 }
 
-<div class="d-flex justify-content-center text-center">
+<div class="container" style="max-width: 600px;">
 
     <form id="formJogador" [formGroup]="formJogador" (ngSubmit)="salvar()">
 
-        <div class="mb-3">
+        <div class="mb-2">
             <label for="nomeJogador" class="form-label">
                 Nome Jogador:
             </label>
@@ -22,7 +22,7 @@
             }
         </div>
 
-        <div class="mb-3">
+        <div class="mb-2">
             <label for="equipe" class="form-label">
                 Equipe:
             </label>
@@ -36,7 +36,7 @@
             }
         </div>
 
-        <div class="mb-3">
+        <div class="mb-2">
             <label for="kills" class="form-label">
                 Kills:
             </label>
@@ -50,7 +50,7 @@
             }
         </div>
 
-        <div class="mb-3">
+        <div class="mb-2">
             <label for="deaths" class="form-label">
                 Deaths:
             </label>
@@ -64,7 +64,7 @@
             }
         </div>
 
-        <div class="mb-3">
+        <div class="mb-2">
             <label for="assists" class="form-label">
                 Assists:
             </label>
@@ -78,7 +78,7 @@
             }
         </div>
 
-        <div class="mb-3">
+        <div class="mb-2">
             <label for="posicao" class="form-label">
                 Posição
             </label>
@@ -104,19 +104,22 @@
             }
         </div>
 
-        <button type="button" class="btn btn-secondary" (click)="cancelar()">
-            Cancelar
-        </button>
+        <div class="d-flex justify-content-center mb-3 gap-2">
 
-        <button type="submit" class="btn btn-primary" [disabled]="formJogador.invalid">
 
-            @if(emEdicao){
-            Salvar
-            } @else {
-            Cadastrar
-            }
+            <button type="button" class="btn btn-secondary" (click)="cancelar()">
+                Cancelar
+            </button>
 
-        </button>
+            <button type="submit" class="btn btn-primary" [disabled]="formJogador.invalid">
 
+                @if(emEdicao){
+                Salvar
+                } @else {
+                Cadastrar
+                }
+
+            </button>
+        </div>
     </form>
 </div>

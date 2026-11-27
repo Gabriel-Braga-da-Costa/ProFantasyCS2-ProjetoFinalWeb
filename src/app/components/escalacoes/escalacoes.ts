@@ -3,6 +3,7 @@ import { PontuacaoService } from '../../services/pontuacao-service';
 import { EscalacaoService } from '../../services/escalacao-service';
 import { JogadorService } from '../../services/jogador-service';
 import { Jogador } from '../../model/jogador';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-escalacoes',
@@ -18,6 +19,8 @@ export class Escalacoes {
   escalacaoService = inject(EscalacaoService);
 
   jogadorService = inject(JogadorService);
+
+  private toast = inject(HotToastService);
 
   jogadoresExibidos = computed(() => {
     return this.jogadorService.jogadores();
@@ -43,6 +46,13 @@ export class Escalacoes {
     this.jogadorService.reservarJogador(jogador.id!);
   }
 
+  removerJogador(jogador: Jogador) {
+    return this.escalacaoService.removerJogador(jogador.id!).then(() => {
 
+      this.toast.success('Removido com sucesso!')
+
+    })
+
+  }
 
 }

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JogadorService } from '../../services/jogador-service';
 import { Jogador } from '../../model/jogador';
 import { Posicao } from '../../model/posicao';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-cadastro-jogadores',
@@ -17,6 +18,7 @@ export class CadastroJogadores {
   private jogadorService = inject(JogadorService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private toast = inject(HotToastService);
 
   emEdicao = this.route.snapshot.paramMap.has('id');
   jogadorId = Number(this.route.snapshot.paramMap.get('id'));
@@ -49,8 +51,9 @@ export class CadastroJogadores {
     };
 
     this.jogadorService.addJogador(novoJogador).then(() => {
-
       this.formJogador.reset();
+
+      this.toast.success('Sucesso');
 
       this.router.navigate(['/']);
     })
@@ -76,6 +79,7 @@ export class CadastroJogadores {
     if (this.formJogador.valid) {
       if (this.emEdicao) {
         this.atualizarJogador();
+
       } else {
         this.cadastrarJogador();
       }
